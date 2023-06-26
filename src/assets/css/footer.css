@@ -1,0 +1,32 @@
+.footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-logo img {
+    max-height: 50px;
+  }
+  
+  .footer-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer-nav li {
+    margin: 0 20px;
+  }
+  
+  .footer-nav a {
+    color: white;
+    font-family: Poppins, sans-serif;
+    font-size: 1.6vh;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease-in-out;
+  }

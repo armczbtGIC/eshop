@@ -1,0 +1,108 @@
+.header {
+    background-color: black;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .header-logo img {
+    max-height: 90px;
+  }
+  
+  .header-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header-nav li {
+    margin: 0 20px;
+  }
+  
+  .header-nav a {
+    color: white;
+    font-family: Poppins, sans-serif;
+    font-size: 2.5vh;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .header-nav-login{
+    margin-top: 5px;
+  }
+  
+  
+  .header-nav-login ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header-nav-login li {
+    margin: 0 20px;
+  }
+  
+  .header-nav-login a {
+    color: white;
+    font-family: Poppins, sans-serif;
+    font-size: 1.5vh;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .header-search {
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  input {
+    width: 1000vw;
+    max-width: 300px;
+    max-height: 20px;
+    font-size: 2px;
+    -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+    border: solid 1.5px #D3D3D3;
+    -webkit-transition: 1s;
+    transition: 1s;
+    font-family: Poppins, sans-serif;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px; /* Ajout de marges internes */
+    }
+    
+    input[type=text]:hover{
+    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+    }
+    
+    input[type=text]:focus {
+    box-shadow: 0 0 5pt 2pt #D3D3D3;
+    outline-width: 0px;
+    }
+
+    input::placeholder {
+        font-family: Poppins;
+        font-size: 10px;
+        text-align: center; /* Centrer le placeholder */
+        padding-top: 5px; /* Ajout de marges internes en haut */
+        padding-bottom: 5px; /* Ajout de marges internes en bas */
+        }
+
+
+    #logocart{
+        max-width: 40px;
+      }
+
+
+      

@@ -1,0 +1,113 @@
+.main-container {
+    display: flex;
+    background-color: #121212;
+  }
+  
+  .sidebar {
+    width: 200px;
+    margin-top: 5vh;
+    margin-left: 5vh;
+    margin-bottom: 5vh;
+    background-color: #121212;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    
+  }
+
+  
+  
+  .sidebar li.active {
+    border: 1px solid white;
+    background-color: #323232;
+  }
+  
+  .sidebar li {
+    padding: 10px;
+    transition: background-color 0.6s, border-color 0.6s;
+  }
+
+  .sidebar li:hover {
+    background-color: #323232;
+  }
+  
+  .sidebar li a {
+    font-family: Poppins;
+    font-size: 80%;
+    text-decoration: none;
+    color: white;
+    transition: text-shadow 0.5s;
+  }
+
+  .sidebar li a:hover {
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 10vh;
+    margin-top: 5vh;
+  }
+
+  .cont{
+    animation: fade-in 0.4s ease-in;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  body{
+    background-color: #121212; 
+    min-height: 100vh;
+  }
+
+  h2{
+    font-family: Poppins;
+    font-size: 85%;
+    margin-bottom: 1.5vw;
+    color: white;
+  }
+
+  p{
+    font-family: Poppins;
+    color: white;
+    font-size: 90%;
+    padding: 1vh;
+  }
+
+  label{
+    color:white;
+  }
+
+
+  label, .inputInfo {
+    display: block;
+  }
+
+  input{
+    min-height: 5vh;
+  }
+
+  .infodiv{
+    padding:2vh;
+  }
+
+  .divrounded{
+    margin-left: 2vh;
+    margin-top: 2vh;
+  }
+
+  .norml{
+    background-color: #000000;
+    min-height: 100vh;
+  }
