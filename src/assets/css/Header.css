@@ -9,6 +9,10 @@
   .header-logo img {
     max-height: 90px;
   }
+
+  .labellog{
+    color:black;
+  }
   
   .header-nav ul {
     display: flex;

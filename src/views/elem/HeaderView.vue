@@ -36,6 +36,9 @@
               <label for="signup-lname" class="labellog">Last name :</label>
               <input type="text" id="signup-lname" name="signup-lname" v-model="signuplname" required><br>
 
+              <label for="signup-adress" class="labellog">Adress :</label>
+              <input type="text" id="signup-adress" name="signup-adress" v-model="signupadress" required><br>
+
               <label for="signup-email" class="labellog">Email :</label>
               <input type="email" id="signup-email" name="signup-email" v-model="signupemail" required><br>
 
@@ -114,11 +117,13 @@
 
 
       <div class="header-search">
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" @keydown.enter="performSearch">
       </div>
       <div class="header-logo">
-        <img src="../../assets/images/cart.png" alt="Logo" id="logocart">
-      </div>
+  <a href="/checkout"> 
+    <img src="../../assets/images/cart.png" alt="Logo" id="logocart">
+  </a>
+</div>
     </div>
   </header>
   </template>
@@ -134,6 +139,7 @@ export default {
       firstName: '',
       lastName: '',
       password: '',
+      adress: '',
       users: [],
       isLoggedIn: false,
     }
@@ -230,6 +236,7 @@ export default {
         email: this.signupemail,
         password: this.signuppassword,
         repeatPassword: this.repeatPassword,
+        adress: this.signupadress
       };
 
       axios.post('http://localhost:3000/api/register', user)
@@ -266,6 +273,7 @@ export default {
           this.signuplname = '';
           this.signupemail = '';
           this.signuppassword = '';
+          this.signupadress = '';
           const signupModal = document.getElementById('signup-modal');
           signupModal.style.display = 'none';
         });
@@ -340,7 +348,12 @@ export default {
         });
     }
   }
-},
+},performSearch(event) {
+      const searchQuery = event.target.value.trim();
+      if (searchQuery) {
+        this.$router.push(`/search/${searchQuery}`);
+      }
+    },
 
   }
 };

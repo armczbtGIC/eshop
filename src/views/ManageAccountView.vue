@@ -7,6 +7,7 @@
       <div class="main-container">
         <div class="sidebar">
           <ul>
+            <li :class="{ active: selectedOption === 'orders' }"><a href="#" @click="showOrders">Your Orders</a></li>
             <li :class="{ active: selectedOption === 'info' }"><a href="#" @click="showInfo">Your Informations</a></li>
             <li :class="{ active: selectedOption === 'email' }"><a href="#" @click="showEmail">Change Infos</a></li>
             <li :class="{ active: selectedOption === 'password' }"><a href="#" @click="showPassword">Change Password</a></li>
@@ -15,6 +16,13 @@
         </div>
   
         <div class="content">
+          <div class="cont" v-if="selectedOption === 'orders'">
+          <h2>Order History</h2>
+          <div v-for="order in orderHistory" :key="order.id" class="order-item">
+            <p>Date: {{ order.date }}</p>
+            <p>Total Amount: {{ order.total }} $</p>
+          </div>
+        </div>
           <div class="cont" v-if="selectedOption === 'info'">
             <h2>Your Informations</h2>
             <p>Here are your informations:</p>
@@ -27,6 +35,10 @@
               <input type="text" v-model="lname" readonly class="inputInfo">
             </div>
             <div class="infodiv">
+              <label>Adress:</label>
+              <input type="text" v-model="adress" readonly class="inputInfo">
+            </div>
+            <div class="infodiv">
               <label>Email:</label>
               <input type="text" v-model="email" readonly class="inputInfo"> 
             </div>
@@ -35,6 +47,7 @@
               <input type="text" v-model="password" readonly class="inputInfo">
             </div>
           </div>
+
           <div class="cont" v-if="selectedOption === 'email'">
             <h2>Change Infos</h2>
             <p>Change your informations here (leave blank if you don't want to change one):</p>
@@ -55,6 +68,12 @@
               <input type="text" v-model="actLName" readonly  class="inputInfo">
               <label>New last name:</label>
               <input type="text" v-model="newLName"  class="inputInfo">
+            </div>
+            <div class="infodiv">
+              <label>Actual adress:</label>
+              <input type="text" v-model="actAdress" readonly  class="inputInfo">
+              <label>New adress:</label>
+              <input type="text" v-model="newAdress"  class="inputInfo">
             </div>
             <div class="divrounded">
               <button class="rounded" type="submit" @click.prevent="changeInfos">Change infos</button>
@@ -102,17 +121,22 @@
         fname: '',
         lname: '',
         email: '',
+        adress:'',
         password: '',
         actEmail: '',
         newEmail:'',
         actFName: '',
+        actAdress:'',
+        newAdress:'',
         newFName:'',
         actLName:'',
         newLName:'',
         confirmPassword:'',
         newPassword:'',
+        orderHistory: [],
       };
     },
+    
     methods: {
       showInfo() {
         this.selectedOption = 'info';
@@ -131,6 +155,7 @@
             this.lname = response.data.lastName;
             this.email = response.data.email;
             this.password = response.data.password;
+            this.adress = response.data.adress;
           })
           .catch(error => {
             console.error(error);
@@ -152,6 +177,7 @@
             this.actEmail = response.data.email;
             this.actFName = response.data.firstName;
             this.actLName = response.data.lastName;
+            this.actAdress = response.data.adress;
           })
           .catch(error => {
             console.error(error);
@@ -184,13 +210,17 @@
         if(newLName==''){
           newLName = this.actLName;
         }
+        let newAdress = this.newAdress;
+        if(newAdress==''){
+          newAdress = this.actAdress;
+        }
         
         console.log(newEmail, newFName, newLName);
         const userId = localStorage.getItem('userId');
         const token = localStorage.getItem('token');
         if (userId && token) {
           axios
-          .post('http://localhost:3000/api/update-user', { userId, newEmail, newFName, newLName}, {
+          .post('http://localhost:3000/api/update-user', { userId, newEmail, newFName, newLName, newAdress}, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -200,6 +230,7 @@
             this.newFName='';
             this.newLName='';
             this.newEmail='';
+            this.newAdress='';
             //this.$router.push('/manageAccount');
             this.showInfo();
           })
@@ -234,7 +265,6 @@
           })
           .then(response => {
             console.log(response.data.token);
-            //this.$router.push('/manageAccount');
             this.newPassword='';
             this.confirmPassword='';
             this.showInfo();
@@ -279,7 +309,6 @@
           })
           .then(response => {
             console.log(response.data.token);
-            //this.$router.push('/manageAccount');
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             this.isLoggedIn = false;
@@ -299,7 +328,38 @@
 
 
   },
+  showOrders() {
+      this.selectedOption = 'orders';
+      const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+
+      if (userId && token) {
+        axios
+          .get(`http://localhost:3000/api/orders/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then(response => {
+            this.orderHistory = response.data.orders;
+            console.log(response.data.orders);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
     },
+    beforeRouteEnter() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.$router.push("/wrongway");
+    }
+  },
+    },
+    mounted(){
+      this.beforeRouteEnter();
+    }
+    
   };
   </script>
 
